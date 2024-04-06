@@ -2,5 +2,5 @@
 
 ## Prerequisites
 
-- Node.js v20.10.0
-- npm v10.2.3
+- Node.js v20.x
+- npm v10.x
