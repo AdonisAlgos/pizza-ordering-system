@@ -1,0 +1,73 @@
+.App-header {
+    text-align: center;
+    min-height: 20vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(10px + 2vmin);
+    color:black;
+  }
+
+
+    .App-username {
+    top: 30px;
+    left: 675px;
+    }
+
+    .App-password {
+    top: 100px;
+    left: 465px;
+    }
+    .App-logginButton {
+      top: 170px;
+      left: 255px;
+    }
+
+    .App-createAccButton {
+      top: 170px;
+      left: 289px;
+      
+    }
+
+    .Register-createAccButton {
+      top: 170px;
+      left: 255px;
+    }
+
+    .Register-backButton {
+      top: 170px;
+      left: 306px;
+    }
+
+    .logOut-Button {
+      top: -120px;
+      left: 1206px;
+    }
+
+    
+
+    .textareaContainer {
+      margin-right: 20px;
+    }
+
+    .textfieldContainer {
+      margin-bottom: 0px;
+    }
+
+   
+
+    
+   
+
+
+
+   
+
+    
+
+    
+
+
+  
+  
