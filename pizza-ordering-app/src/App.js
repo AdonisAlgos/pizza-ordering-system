@@ -1,12 +1,7 @@
 import "./App.css";
-import Pizza from "./Pizza";
 
 function App() {
-  return (
-    <div>
-      <Pizza />
-    </div>
-  );
+  return <div></div>;
 }
 
 export default App;
