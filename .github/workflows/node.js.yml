@@ -6,6 +6,10 @@ on:
   pull_request:
     branches: [ main ]
 
+defaults:
+  run:
+    working-directory: ./pizza-ordering-app
+
 jobs:
   build:
     strategy:
@@ -25,9 +29,9 @@ jobs:
       run: cd pizza-ordering-app
     - name: Install dependencies
       run: npm ci
-      working-directory: ./pizza-ordering-app
+    - name: Run tests
+      run: npm test
     - name: Build the project
       run: npm run build
-      working-directory: ./pizza-ordering-app
       env:
         CI: true
