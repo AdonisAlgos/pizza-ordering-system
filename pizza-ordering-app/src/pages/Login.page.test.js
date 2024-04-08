@@ -6,8 +6,9 @@ test("renders login page and checks for username, password fields and login, reg
 
   const username = screen.getByPlaceholderText("Username");
   const password = screen.getByPlaceholderText("Password");
-  const loginButton = screen.getByText("Login");
-  const registerButton = screen.getByText("Register");
+  const loginButton = screen.getByRole("button", { name: "Login" });
+  const registerButton = screen.getByRole("button", { name: "Register" });
+
 
   expect(username).toBeInTheDocument();
   expect(password).toBeInTheDocument();
