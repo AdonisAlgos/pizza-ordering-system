@@ -2,19 +2,18 @@ import React from "react";
 
 const LoginPage = () => {
   return (
-    <div>
-      <h1>Login</h1>
-      <div>
-        <input type="text" placeholder="Username" />
+    <form>
+      <div class="form-group">
+        <input type="text" class="form-control" placeholder="Username" />
       </div>
-      <div>
-        <input type="password" placeholder="Password" />
+      <div class="form-group">
+        <input type="password" class="form-control" placeholder="Password" />
       </div>
-      <div>
-        <button>Login</button>
-        <button>Register</button>
+      <div class="d-flex justify-content-center">
+        <button class="btn btn-primary me-2">Login</button>
+        <button class="btn btn-primary">Register</button>
       </div>
-    </div>
+    </form>
   );
 };
 
