@@ -4,7 +4,7 @@ import { TextField } from "@mui/material";
 import './App.css';
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import {  gql } from '@apollo/client';
+import { gql } from '@apollo/client';
 import client from './components/Client';
 import Button from '@mui/material/Button';
 
@@ -13,6 +13,30 @@ export var usernameinfo = "";
 const getParameter = (inputParameter) => {
   usernameinfo = inputParameter;
   
+};
+
+const CHECK_USER_QUERY = gql`
+query CheckUser($username: String!, $password: String!) {
+  appointment_project(where: { username: { _eq: $username }, password: { _eq: $password } }) {
+    username
+    password
+  }
+}
+`;
+
+export const checkUser = async (username, password) => {
+  try {
+    const { data } = await client.query({
+      query: CHECK_USER_QUERY,
+      variables: { username, password },
+    });
+
+    const userExists = data?.appointment_project?.length > 0;
+    return userExists ?? false;
+  } catch (error) {
+    console.error('Error checking user:', error);
+    return false;
+  }
 };
 
 function App() {
@@ -62,30 +86,9 @@ function App() {
   }
 
 
-  const CHECK_USER_QUERY = gql`
-  query CheckUser($username: String!, $password: String!) {
-    appointment_project(where: { username: { _eq: $username }, password: { _eq: $password } }) {
-      username
-      password
-    }
-  }
-`;
+ 
 
-const checkUser = async (username, password) => {
-  try {
-    const { data } = await client.query({
-      query: CHECK_USER_QUERY,
-      variables: { username, password },
-    });
-
-    const userExists = data.appointment_project.length > 0;
-    return userExists;
-  } catch (error) {
-    alert("User do not exist!");
-    console.error('Error checking user:', error);
-    return false;
-  }
-};
+  
 
   function createAcc() {
     let path = `/registerPage`; 
