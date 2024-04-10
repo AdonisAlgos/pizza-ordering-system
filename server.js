@@ -1,5 +1,7 @@
 import express from "express";
 import { MongoClient, ServerApiVersion } from "mongodb";
+import bcrypt from "bcrypt";
+import UserModel from "./path/to/your/UserModel"; // Make sure to adjust this path
 import dotenv from "dotenv";
 
 dotenv.config();
@@ -22,7 +24,7 @@ async function connectMongo() {
   try {
     await client.connect();
     console.log("Connected to MongoDB");
-    db = client.db("pizzaSystem"); // Use your DB name
+    db = client.db("pizzaSystem");
   } catch (err) {
     console.error("Failed to connect to MongoDB:", err);
     process.exit(1);
@@ -34,7 +36,6 @@ app.post("/register", async (req, res) => {
   const { name, lastName, email, password, streetAddress, city, postcode } =
     req.body;
 
-  // Basic validation
   if (
     !name ||
     !lastName ||
@@ -48,17 +49,14 @@ app.post("/register", async (req, res) => {
   }
 
   try {
-    // Check if the user already exists
     const existingUser = await UserModel.findOne({ email });
     if (existingUser) {
       return res.status(409).send({ message: "User already exists" });
     }
 
-    // Hash the password
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(password, salt);
 
-    // Create a new user
     const newUser = new UserModel({
       name,
       lastName,
@@ -70,7 +68,6 @@ app.post("/register", async (req, res) => {
     });
 
     await newUser.save();
-
     res.status(201).send({ message: "User registered successfully" });
   } catch (error) {
     res.status(500).send({ message: "Server error" });
@@ -86,7 +83,6 @@ app.post("/login", async (req, res) => {
     return res.status(401).send({ message: "Invalid credentials" });
   }
 
-  // Send a simple token back (Note: In production, use a secure token strategy)
   res.status(200).send({ token: "fake-token-for-" + username });
 });
 
@@ -105,7 +101,7 @@ app.get("/orders", async (req, res) => {
   res.status(200).send(orders);
 });
 
-// Start the server
+// Function to start the server
 async function startServer() {
   await connectMongo();
   const port = process.env.PORT || 5100;
@@ -114,4 +110,9 @@ async function startServer() {
   });
 }
 
-startServer();
+// Check if the file is run directly and not required somewhere else
+if (require.main === module) {
+  startServer();
+}
+
+export { app, startServer };
