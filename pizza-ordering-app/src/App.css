@@ -1,0 +1,155 @@
+.peperoniPizza {
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    transition-duration: 0.4s;
+    width: 100px; 
+    height: 100px; 
+  }
+
+  .margharitaPizza {
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    transition-duration: 0.4s;
+    width: 100px; 
+    height: 100px; 
+  }
+
+  .bbqChickenPizza {
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    transition-duration: 0.4s;
+    width: 100px; 
+    height: 100px; 
+  }
+
+  .orderButton {
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 40px 615px;
+    cursor: pointer;
+    transition-duration: 0.4s;
+    width: 100px; 
+    height: 50px; 
+  }
+
+  .customOrderButton {
+    position: absolute;
+    top: 317px; 
+    left: 800px; 
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    transition-duration: 0.4s;
+    width: 100px; 
+    height: 50px; 
+  }
+
+  .closeOrder {
+    position: absolute;
+    top: 630px;
+    left: 600px;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    transition-duration: 0.4s;
+    width: 100px; 
+    height: 50px; 
+  }
+
+  .finialOrder {
+    position: absolute;
+    top: 630px;
+    left: 800px;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    transition-duration: 0.4s;
+    width: 100px; 
+    height: 50px; 
+  }
+
+  .button-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    height: 50vh;
+  }
+
+.peperoniPizza,
+.margharitaPizza,
+.bbqChickenPizza{
+  margin: 0 20px; /* This adds 10px of space to the left and right of each button */
+}
+
+
+  .radio-buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    margin-top: -100px;
+    margin-left: 600px;
+  }
+
+  .radio-buttons input[type="radio"] {
+    margin: 0 10px; /* This adds 10px of space to the left and right of each radio button */
+  }
+
+  .custom-checkbox-buttons {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    margin-top: 0px;
+    margin-left: 600px;
+  }
+  
+  .custom-checkbox-buttons input[type="checkbox"] {
+    margin: 10px 0; /* This adds 10px of space above and below each checkbox */
+  }
+
+  
+
+ 
