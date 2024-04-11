@@ -1,32 +1,24 @@
-import express from "express";
-import { MongoClient, ServerApiVersion } from "mongodb";
-import bcrypt from "bcrypt";
-import UserModel from "./path/to/your/UserModel"; // Make sure to adjust this path
-import dotenv from "dotenv";
+const express = require("express");
+const bcrypt = require("bcrypt");
+const UserModel = require("./models/User.model"); // Adjust this path if necessary
+const mongoose = require("mongoose");
+const dotenv = require("dotenv");
 
 dotenv.config();
 
 const app = express();
 app.use(express.json()); // Middleware to parse JSON bodies
 
-const client = new MongoClient(process.env.MONGODB_URI, {
-  serverApi: {
-    version: ServerApiVersion.v1,
-    strict: true,
-    deprecationErrors: true,
-  },
-});
-
-let db;
-
-// Connect to MongoDB
+// Connect to MongoDB using Mongoose
 async function connectMongo() {
   try {
-    await client.connect();
-    console.log("Connected to MongoDB");
-    db = client.db("pizzaSystem");
+    await mongoose.connect(process.env.MONGODB_URI, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
+    console.log("Connected to MongoDB with Mongoose");
   } catch (err) {
-    console.error("Failed to connect to MongoDB:", err);
+    console.error("Failed to connect to MongoDB with Mongoose:", err);
     process.exit(1);
   }
 }
@@ -104,15 +96,14 @@ app.get("/orders", async (req, res) => {
 // Function to start the server
 async function startServer() {
   await connectMongo();
-  const port = process.env.PORT || 5100;
+  const port = 5100;
   app.listen(port, () => {
     console.log(`Server listening on port ${port}`);
   });
 }
 
-// Check if the file is run directly and not required somewhere else
 if (require.main === module) {
   startServer();
 }
 
-export { app, startServer };
+module.exports = { app, startServer };
