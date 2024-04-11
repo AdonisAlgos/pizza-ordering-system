@@ -1,10 +1,7 @@
 import "./App.css";
 import LoginPage from "./pages/Login.page";
 import HomePage from "./pages/Home.page";
-import {
-  BrowserRouter as createBrowserRouter,
-  RouterProvider,
-} from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 const router = createBrowserRouter([
   {
