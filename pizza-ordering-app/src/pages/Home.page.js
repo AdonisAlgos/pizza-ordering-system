@@ -27,15 +27,19 @@ const HomePage = () => {
   };
 
   const handleFinishOrderClick = () => {
-    let order = 'You ordered a pizza with: ';
-    if (mushrooms) order += 'mushrooms, ';
-    if (sweetcorn) order += 'sweetcorn, ';
-    if (pickles) order += 'pickles, ';
-    alert(order);
-
-    setMushrooms(false);
-    setSweetcorn(false);
-    setPickles(false);
+    if (!mushrooms && !sweetcorn && !pickles) {
+      alert('Please select at least one topping before finishing your order.');
+    } else {
+      let order = 'You ordered a pizza with: ';
+      if (mushrooms) order += 'mushrooms, ';
+      if (sweetcorn) order += 'sweetcorn, ';
+      if (pickles) order += 'pickles, ';
+      alert(order);
+  
+      setMushrooms(false);
+      setSweetcorn(false);
+      setPickles(false);
+    }
   };
 
   const handleRadioChange = (event) => {
@@ -43,8 +47,13 @@ const HomePage = () => {
   }
 
   const orderPizza = () => {
-    alert(`You selected: ${selectedPizza}`);
-  }
+    if (!selectedPizza) {
+      alert('Please select a pizza before ordering.');
+    } else {
+      alert(`You selected: ${selectedPizza}`);
+      setSelectedPizza('');
+    }
+  };
 
   const handleCustomOrderClick = () => {
     setShowMenu(!showMenu);
@@ -65,11 +74,11 @@ const HomePage = () => {
        <Button className="bbqChickenPizza">BBQ Chicken Pizza(Image)</Button>
     </div>
     <div className="radio-buttons">
-       <input type="radio" id="peperoni" name="pizza" value="peperoni" onChange={handleRadioChange}/>
+       <input type="radio" id="peperoni" name="pizza" value="peperoni" onChange={handleRadioChange}  checked={selectedPizza === 'peperoni'}/>
        <label htmlFor="peperoni">Peperoni Pizza</label>
-       <input type="radio" id="margharita" name="pizza" value="margharita" onChange={handleRadioChange}/>
+       <input type="radio" id="margharita" name="pizza" value="margharita" onChange={handleRadioChange} checked={selectedPizza === 'margharita'}/>
        <label htmlFor="margharita">Margharita Pizza</label>
-       <input type="radio" id="bbqChicken" name="pizza" value="bbqChicken" onChange={handleRadioChange}/>
+       <input type="radio" id="bbqChicken" name="pizza" value="bbqChicken" onChange={handleRadioChange} checked={selectedPizza === 'bbqChicken'}/>
        <label htmlFor="bbqChicken">BBQ Chicken Pizza</label>
     </div>
     <Button className="orderButton" onClick={orderPizza}>Order</Button>
