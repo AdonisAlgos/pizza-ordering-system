@@ -1,5 +1,6 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { Link } from "react-router-dom";
 
 const LoginPage = () => {
   return (
@@ -24,6 +25,7 @@ const LoginPage = () => {
             </div>
           </form>
         </div>
+        <Link to="/register">Register</Link>
       </div>
     </div>
   );
