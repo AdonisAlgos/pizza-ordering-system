@@ -2,10 +2,7 @@ import "./App.css";
 import LoginPage from "./pages/Login.page";
 import HomePage from "./pages/Home.page";
 import {
-  BrowserRouter as Router,
-  Route,
-  Switch,
-  createBrowserRouter,
+  BrowserRouter as createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
 
