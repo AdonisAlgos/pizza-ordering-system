@@ -3,6 +3,7 @@ const { app } = require("./server");
 const mongoose = require("mongoose");
 const UserModel = require("./models/User.model");
 const dotenv = require("dotenv");
+const PizzaModel = require("./models/Pizza.model");
 
 dotenv.config();
 
@@ -16,7 +17,8 @@ beforeAll(async () => {
 
 // Clean up the database between tests
 afterEach(async () => {
-  await UserModel.deleteMany();
+  // await UserModel.deleteMany();
+  // await PizzaModel.deleteMany();
 });
 
 // Close the database connection after all tests

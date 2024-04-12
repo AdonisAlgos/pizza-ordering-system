@@ -2,7 +2,6 @@ import React from "react";
 import HomePage from "./Home.page";
 import { render, screen } from "@testing-library/react";
 import { getPizzas } from "../apis/getPizzas";
-import "@testing-library/jest-dom/extend-expect";
 
 // Mock the module that exports getPizzas
 jest.mock("../apis/getPizzas");

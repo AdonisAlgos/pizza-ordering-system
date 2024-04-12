@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { getPizzas } from "../apis/getPizzas";
+import { images } from "../components/Images";
 
 const HomePage = () => {
   const [pizzas, setPizzas] = useState([]);
@@ -39,20 +40,30 @@ const HomePage = () => {
                   <div key={index}>{ingredient}</div>
                 ))}
               </div>
-              <div className="bg-danger p-3">
-                <div>...</div>
-                <div
-                  style={{
-                    backgroundColor: "black",
-                    color: "white",
-                    opacity: 0.8,
-                  }}
-                  className="d-flex gap-3"
-                >
-                  <div>Small {pizza.sizes[0].price}</div>
-                  <div>Medium {pizza.sizes[1].price}</div>
-                  <div>Large {pizza.sizes[2].price}</div>
-                </div>
+              <div>...</div>
+              <div className="position-relative" style={{ paddingTop: "100%" }}>
+                <img
+                  className="img-fluid position-absolute top-0 start-0 w-100 h-100"
+                  src={
+                    images[pizza.name.toLowerCase().replace(/\s/g, "")]
+                      ? images[pizza.name.toLowerCase().replace(/\s/g, "")]
+                      : images["default"]
+                  }
+                  alt={pizza.name}
+                  style={{ objectFit: "cover" }}
+                />
+              </div>
+              <div
+                style={{
+                  backgroundColor: "black",
+                  color: "white",
+                  opacity: 0.8,
+                }}
+                className="d-flex gap-3"
+              >
+                <div>Small {pizza.sizes[0].price}</div>
+                <div>Medium {pizza.sizes[1].price}</div>
+                <div>Large {pizza.sizes[2].price}</div>
               </div>
               <button
                 style={{ borderColor: "lightGrey" }}
