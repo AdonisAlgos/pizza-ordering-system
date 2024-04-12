@@ -1,15 +1,14 @@
-import React from 'react'
+import React from "react";
 import { useState, useEffect } from "react";
-import axios from "axios";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { getPizzas } from "../apis/getPizzas";
 
 const HomePage = () => {
   const [pizzas, setPizzas] = useState([]);
 
   useEffect(() => {
-    axios
-      .get(`http://localhost:5100/pizzas`)
+    getPizzas()
       .then((response) => {
         setPizzas(response.data);
       })
@@ -29,7 +28,7 @@ const HomePage = () => {
       >
         Best Stone Oven Pizza in London
       </h1>
-      {/* Grid starts here */}
+
       <div className="container mt-4">
         <div className="row">
           {pizzas.map((pizza, index) => (
@@ -69,5 +68,4 @@ const HomePage = () => {
   );
 };
 
-
-export default HomePage
+export default HomePage;
