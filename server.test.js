@@ -87,5 +87,24 @@ describe("User Registration", () => {
     expect(response.body).toHaveProperty("message", "User already exists");
   });
 
+  test("It should create pizza", async () => {
+    const newPizza = {
+      name: "Pawaiian",
+      ingredients: ["Tomato Sauce", "Mozzarella Cheese", "Ham", "Pineapple"],
+      sizes: [
+        { size: "Small", price: 5.99 },
+        { size: "Medium", price: 7.99 },
+        { size: "Large", price: 9.99 },
+      ],
+    };
+
+    const response = await request(app).post("/pizza").send(newPizza);
+
+    expect(response.statusCode).toBe(201);
+    expect(response.body).toHaveProperty(
+      "message",
+      "Pizza created successfully"
+    );
+  });
   // Add more tests as needed for different scenarios
 });

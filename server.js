@@ -1,13 +1,16 @@
 const express = require("express");
 const bcrypt = require("bcrypt");
-const UserModel = require("./models/User.model"); // Adjust this path if necessary
+const UserModel = require("./models/User.model");
+const PizzaModel = require("./models/Pizza.model");
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
+const cors = require("cors");
 
 dotenv.config();
 
 const app = express();
 app.use(express.json()); // Middleware to parse JSON bodies
+app.use(cors());
 
 // Connect to MongoDB using Mongoose
 async function connectMongo() {
@@ -69,7 +72,7 @@ app.post("/register", async (req, res) => {
 // User authentication endpoint
 app.post("/login", async (req, res) => {
   const { username, password } = req.body;
-  const user = await db.collection("users").findOne({ username, password });
+  const user = await db.collection("customer").findOne({ username, password });
 
   if (!user) {
     return res.status(401).send({ message: "Invalid credentials" });
@@ -80,14 +83,36 @@ app.post("/login", async (req, res) => {
 
 // Pizza retrieval endpoint
 app.get("/pizzas", async (req, res) => {
-  const pizzas = await db.collection("pizzas").find({}).toArray();
-  res.status(200).send(pizzas);
+  try {
+    const pizzas = await PizzaModel.find({});
+    res.status(200).json(pizzas); // It's a good practice to use res.json() to send JSON responses
+  } catch (error) {
+    console.error("Error retrieving pizzas:", error);
+    res.status(500).json({ message: "Error retrieving pizzas" });
+  }
+});
+
+app.post("/pizza", async (req, res) => {
+  try {
+    // Create a new pizza using the PizzaModel
+    const newPizza = new PizzaModel(req.body);
+
+    // Save the pizza to the database
+    await newPizza.save();
+
+    // Send a success response
+    res.status(201).send({ message: "Pizza created successfully" });
+  } catch (error) {
+    // Handle potential errors
+    console.error("Error creating pizza:", error);
+    res.status(500).send({ message: "Error creating pizza" });
+  }
 });
 
 // Completed orders retrieval endpoint
 app.get("/orders", async (req, res) => {
   const orders = await db
-    .collection("orders")
+    .collection("order")
     .find({ status: "completed" })
     .toArray();
   res.status(200).send(orders);
