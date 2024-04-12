@@ -34,13 +34,12 @@ const HomePage = () => {
         <div className="row">
           {pizzas.map((pizza, index) => (
             <div key={index} className="col-lg-3 col-md-4 col-sm-6 col-12 mb-3">
-              <div>{pizza.name}</div>
+              <h3>{pizza.name}</h3>
               <div>
-                {pizza.ingredients.slice(0, 3).map((ingredient, index) => (
-                  <div key={index}>{ingredient}</div>
-                ))}
+                Main Ingredients include: {pizza.ingredients[0]},{" "}
+                {pizza.ingredients[1]}, {pizza.ingredients[2]}...
               </div>
-              <div>...</div>
+              <br />
               <div className="position-relative" style={{ paddingTop: "100%" }}>
                 <img
                   className="img-fluid position-absolute top-0 start-0 w-100 h-100"
@@ -57,20 +56,42 @@ const HomePage = () => {
                 style={{
                   backgroundColor: "black",
                   color: "white",
-                  opacity: 0.8,
                 }}
-                className="d-flex gap-3"
+                className="d-flex p-2 gap-2 justify-content-around"
               >
-                <div>Small {pizza.sizes[0].price}</div>
-                <div>Medium {pizza.sizes[1].price}</div>
-                <div>Large {pizza.sizes[2].price}</div>
+                <div className="d-flex flex-column align-items-center justify-content-center">
+                  <div>Small</div>
+                  <div>£{pizza.sizes[0].price}</div>
+                </div>
+                <div className="d-flex flex-column align-items-center justify-content-center">
+                  <div>Medium</div>
+                  <div>£{pizza.sizes[1].price}</div>
+                </div>
+                <div className="d-flex flex-column align-items-center justify-content-center">
+                  <div>Large</div>
+                  <div>£{pizza.sizes[2].price}</div>
+                </div>
               </div>
-              <button
-                style={{ borderColor: "lightGrey" }}
-                className="btn btn-primary mt-3 bg-white"
-              >
-                {<FontAwesomeIcon icon={faPlus} color="red" />}
-              </button>
+              <div className="d-flex gap-2">
+                <button
+                  style={{ borderColor: "lightGrey" }}
+                  className="btn btn-primary mt-3 bg-white w-100"
+                >
+                  {<FontAwesomeIcon icon={faPlus} color="black" />}
+                </button>
+                <button
+                  style={{ borderColor: "lightGrey" }}
+                  className="btn btn-primary mt-3 bg-white w-100"
+                >
+                  {<FontAwesomeIcon icon={faPlus} color="black" />}
+                </button>
+                <button
+                  style={{ borderColor: "lightGrey" }}
+                  className="btn btn-primary mt-3 bg-white w-100"
+                >
+                  {<FontAwesomeIcon icon={faPlus} color="black" />}
+                </button>
+              </div>
             </div>
           ))}
         </div>
