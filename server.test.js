@@ -2,14 +2,15 @@ const request = require("supertest");
 const { app } = require("./server");
 const mongoose = require("mongoose");
 const UserModel = require("./models/User.model");
-const dotenv = require("dotenv");
+const OrderModel = require("./models/Order.model");
 const PizzaModel = require("./models/Pizza.model");
+const dotenv = require("dotenv");
 
 dotenv.config();
 
-// Setup a test database connection
+// Database connection
 beforeAll(async () => {
-  await mongoose.connect(process.env.MONGODB_URI, {
+  await mongoose.connect(process.env.MONGODB_TEST_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   });
@@ -17,17 +18,17 @@ beforeAll(async () => {
 
 // Clean up the database between tests
 afterEach(async () => {
-  // await UserModel.deleteMany();
-  // await PizzaModel.deleteMany();
+  await UserModel.deleteMany();
+  await PizzaModel.deleteMany();
+  await OrderModel.deleteMany();
 });
 
-// Close the database connection after all tests
 afterAll(async () => {
   await mongoose.connection.close();
 });
 
 describe("User Registration", () => {
-  it("should return 400 for missing fields", async () => {
+  test("should return 400 for missing fields", async () => {
     const response = await request(app)
       .post("/register")
       .send({ name: "Test" }); // Incomplete data for testing
@@ -76,7 +77,7 @@ describe("User Registration", () => {
     const newUser = {
       name: "Jane",
       lastName: "Smith",
-      email: "jane.doe@example.com", // Same email as the user above
+      email: "jane.doe@example.com", // Same email as user above
       password: "password1234",
       streetAddress: "125 Main St",
       city: "Othertown",

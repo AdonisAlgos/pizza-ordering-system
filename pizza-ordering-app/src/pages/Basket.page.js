@@ -4,8 +4,6 @@ import { useCart } from "../contexts/Basket.context";
 const BasketPage = () => {
   const { cartItems } = useCart();
 
-  console.log(cartItems);
-
   return (
     <div className="flex-column flex: 1 container d-flex align-items-center justify-content-center">
       <h3 className="text-center mb-4">Basket</h3>

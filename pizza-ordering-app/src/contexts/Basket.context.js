@@ -11,10 +11,6 @@ export const CartProvider = ({ children }) => {
     setCartItems((currentItems) => [...currentItems, item]);
   };
 
-  useEffect(() => {
-    console.log("CartProvider mounted");
-  }, []);
-
   return (
     <CartContext.Provider value={{ cartItems, addToCart }}>
       {children}

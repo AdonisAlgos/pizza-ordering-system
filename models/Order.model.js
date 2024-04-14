@@ -33,10 +33,10 @@ const orderSchema = new mongoose.Schema(
     },
   },
   {
-    timestamps: true, // Adds createdAt and updatedAt timestamps
+    timestamps: true,
   }
 );
 
-const OrderModel = mongoose.model("Order", orderSchema);
+const OrderModel = mongoose.model("order", orderSchema);
 
 module.exports = OrderModel;

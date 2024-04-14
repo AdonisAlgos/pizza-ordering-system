@@ -22,12 +22,11 @@ const HomePage = () => {
   }, []);
 
   const handleAddToCart = (pizza, sizeIndex) => {
-    const size = pizza.sizes[sizeIndex];
     const itemToAdd = {
       name: pizza.name,
       ingredients: pizza.ingredients,
-      size: size.name,
-      price: size.price,
+      size: pizza.sizes[sizeIndex].size,
+      price: pizza.sizes[sizeIndex].price,
       image: images[pizza.name.toLowerCase().replace(/\s/g, "")]
         ? images[pizza.name.toLowerCase().replace(/\s/g, "")]
         : images["default"],
@@ -87,7 +86,7 @@ const HomePage = () => {
                       onClick={() => handleAddToCart(pizza, sizeIndex)}
                       style={{ borderColor: "lightGrey" }}
                       className="btn btn-primary mt-3 bg-white"
-                      aria-label="Add to cart"
+                      data-testid="add-to-cart-button"
                     >
                       <FontAwesomeIcon icon={faPlus} color="black" />
                     </button>

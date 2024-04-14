@@ -6,7 +6,7 @@ import {
   render,
   screen,
   waitFor,
-  waitForElement,
+  act,
 } from "@testing-library/react";
 import { getPizzas } from "../apis/getPizzas";
 import { useCart } from "../contexts/Basket.context";
@@ -31,9 +31,12 @@ beforeEach(() => {
 
 test("successfully renders home page", async () => {
   render(<HomePage />);
-  expect(
-    screen.getByText(/Best Stone Oven Pizza in London/i)
-  ).toBeInTheDocument();
+
+  await waitFor(() => {
+    expect(
+      screen.getByText(/Best Stone Oven Pizza in London/i)
+    ).toBeInTheDocument();
+  });
 });
 
 test("fetches and displays pizza data", async () => {
@@ -48,6 +51,7 @@ test("fetches and displays pizza data", async () => {
       ],
     },
   ];
+
   getPizzas.mockResolvedValue({ data: mockPizzas });
   render(<HomePage />);
   await waitFor(() => {
@@ -66,10 +70,13 @@ test("fetches and displays pizza data", async () => {
 test("adds pizza to cart", async () => {
   const mockPizzas = [
     {
-      name: "Pepperoni",
-      ingredients: ["Pepperoni", "Cheese", "Tomato Sauce"],
-      sizes: [{ size: "Medium", price: 12 }],
-      image: "default.webp",
+      name: "Margherita",
+      ingredients: ["Tomato", "Mozzarella", "Basil"],
+      sizes: [
+        { size: "Small", price: 8 },
+        { size: "Medium", price: 10 },
+        { size: "Large", price: 12 },
+      ],
     },
   ];
   getPizzas.mockResolvedValue({ data: mockPizzas });
@@ -80,11 +87,18 @@ test("adds pizza to cart", async () => {
   }));
 
   render(<HomePage />);
-  const addButton = await screen.findByRole("button", { name: /add to cart/i });
 
-userEvent.click(addButton);
+  // Fetch all buttons and click the one for the Medium size pizza
+  const addButtons = await screen.findAllByTestId("add-to-cart-button");
+  userEvent.click(addButtons[1]); // Assuming the second button is for Medium
 
   await waitFor(() => {
-    expect(addToCart).toHaveBeenCalledWith(expect.anything()); // Replace with the actual expected object
+    expect(addToCart).toHaveBeenCalledWith({
+      name: "Margherita",
+      ingredients: ["Tomato", "Mozzarella", "Basil"],
+      size: "Medium",
+      price: 10,
+      image: "default.webp",
+    });
   });
 });
