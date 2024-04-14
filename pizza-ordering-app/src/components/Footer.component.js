@@ -5,6 +5,7 @@ import {
   faInstagram,
   faFacebook,
 } from "@fortawesome/free-brands-svg-icons";
+import { Link } from "react-router-dom";
 
 const FooterComponent = () => {
   return (
@@ -18,19 +19,19 @@ const FooterComponent = () => {
 
         <ul className="nav col-md-4 justify-content-end list-unstyled d-flex">
           <li className="ms-3">
-            <a className="text-muted">
+            <Link className="text-muted">
               <FontAwesomeIcon icon={faTwitter} size="lg" />
-            </a>
+            </Link>
           </li>
           <li className="ms-3">
-            <a className="text-muted">
+            <Link className="text-muted">
               <FontAwesomeIcon icon={faInstagram} size="lg" />
-            </a>
+            </Link>
           </li>
           <li className="ms-3">
-            <a className="text-muted">
+            <Link className="text-muted">
               <FontAwesomeIcon icon={faFacebook} size="lg" />
-            </a>
+            </Link>
           </li>
         </ul>
       </footer>
