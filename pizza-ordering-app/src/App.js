@@ -9,6 +9,7 @@ import {
   LayoutPage,
 } from "./pages";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { CartProvider } from "./contexts/Basket.context";
 
 const router = createBrowserRouter([
   {
@@ -41,7 +42,11 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
-  return <RouterProvider router={router} />;
+  return (
+    <CartProvider>
+      <RouterProvider router={router} />
+    </CartProvider>
+  );
 }
 
 export default App;

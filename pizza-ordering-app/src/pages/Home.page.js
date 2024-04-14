@@ -4,9 +4,12 @@ import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { getPizzas } from "../apis/getPizzas";
 import { images } from "../components/Images";
+import { useCart } from "../contexts/Basket.context";
 
 const HomePage = () => {
   const [pizzas, setPizzas] = useState([]);
+
+  const { addToCart } = useCart();
 
   useEffect(() => {
     getPizzas()
@@ -18,8 +21,22 @@ const HomePage = () => {
       });
   }, []);
 
+  const handleAddToCart = (pizza, sizeIndex) => {
+    const size = pizza.sizes[sizeIndex];
+    const itemToAdd = {
+      name: pizza.name,
+      ingredients: pizza.ingredients,
+      size: size.name,
+      price: size.price,
+      image: images[pizza.name.toLowerCase().replace(/\s/g, "")]
+        ? images[pizza.name.toLowerCase().replace(/\s/g, "")]
+        : images["default"],
+    };
+    addToCart(itemToAdd);
+  };
+
   return (
-    <div>
+    <div className="flex-column flex: 1 container d-flex align-items-center justify-content-center">
       <h1
         className="d-flex align-items-center justify-content-center text-center"
         style={{
@@ -59,38 +76,22 @@ const HomePage = () => {
                 }}
                 className="d-flex p-2 gap-2 justify-content-around"
               >
-                <div className="d-flex flex-column align-items-center justify-content-center">
-                  <div>Small</div>
-                  <div>£{pizza.sizes[0].price}</div>
-                </div>
-                <div className="d-flex flex-column align-items-center justify-content-center">
-                  <div>Medium</div>
-                  <div>£{pizza.sizes[1].price}</div>
-                </div>
-                <div className="d-flex flex-column align-items-center justify-content-center">
-                  <div>Large</div>
-                  <div>£{pizza.sizes[2].price}</div>
-                </div>
-              </div>
-              <div className="d-flex gap-2">
-                <button
-                  style={{ borderColor: "lightGrey" }}
-                  className="btn btn-primary mt-3 bg-white w-100"
-                >
-                  {<FontAwesomeIcon icon={faPlus} color="black" />}
-                </button>
-                <button
-                  style={{ borderColor: "lightGrey" }}
-                  className="btn btn-primary mt-3 bg-white w-100"
-                >
-                  {<FontAwesomeIcon icon={faPlus} color="black" />}
-                </button>
-                <button
-                  style={{ borderColor: "lightGrey" }}
-                  className="btn btn-primary mt-3 bg-white w-100"
-                >
-                  {<FontAwesomeIcon icon={faPlus} color="black" />}
-                </button>
+                {pizza.sizes.map((size, sizeIndex) => (
+                  <div
+                    key={sizeIndex}
+                    className="d-flex flex-column align-items-center justify-content-center"
+                  >
+                    <div>{size.size}</div>
+                    <div>£{size.price}</div>
+                    <button
+                      onClick={() => handleAddToCart(pizza, sizeIndex)}
+                      style={{ borderColor: "lightGrey" }}
+                      className="btn btn-primary mt-3 bg-white"
+                    >
+                      <FontAwesomeIcon icon={faPlus} color="black" />
+                    </button>
+                  </div>
+                ))}
               </div>
             </div>
           ))}

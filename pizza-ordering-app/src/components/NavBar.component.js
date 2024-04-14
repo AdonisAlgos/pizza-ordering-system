@@ -10,12 +10,10 @@ const Navbar = () => {
         backgroundColor: "white",
       }}
     >
-      {" "}
-      {/* Added the custom class here */}
       <div className="d-flex col-10 col-md-8 mx-auto">
-        <a className="nav-link p-2" href="/">
+        <Link to="/" className="nav-link p-2">
           Home
-        </a>
+        </Link>
         <div className="d-flex justify-content-end w-100">
           <ul className="navbar-nav">
             <li className="nav-item">
