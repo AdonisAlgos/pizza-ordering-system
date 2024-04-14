@@ -9,7 +9,7 @@ const cors = require("cors");
 dotenv.config();
 
 const app = express();
-app.use(express.json()); // Middleware to parse JSON bodies
+app.use(express.json());
 app.use(cors());
 
 // Connect to MongoDB using Mongoose
@@ -85,7 +85,7 @@ app.post("/login", async (req, res) => {
 app.get("/pizzas", async (req, res) => {
   try {
     const pizzas = await PizzaModel.find({});
-    res.status(200).json(pizzas); // It's a good practice to use res.json() to send JSON responses
+    res.status(200).json(pizzas);
   } catch (error) {
     console.error("Error retrieving pizzas:", error);
     res.status(500).json({ message: "Error retrieving pizzas" });
@@ -94,22 +94,17 @@ app.get("/pizzas", async (req, res) => {
 
 app.post("/pizza", async (req, res) => {
   try {
-    // Create a new pizza using the PizzaModel
     const newPizza = new PizzaModel(req.body);
 
-    // Save the pizza to the database
     await newPizza.save();
 
-    // Send a success response
     res.status(201).send({ message: "Pizza created successfully" });
   } catch (error) {
-    // Handle potential errors
     console.error("Error creating pizza:", error);
     res.status(500).send({ message: "Error creating pizza" });
   }
 });
 
-// Completed orders retrieval endpoint
 app.get("/orders", async (req, res) => {
   const orders = await db
     .collection("order")
@@ -118,7 +113,6 @@ app.get("/orders", async (req, res) => {
   res.status(200).send(orders);
 });
 
-// Function to start the server
 async function startServer() {
   await connectMongo();
   const port = 5100;
