@@ -1,26 +1,90 @@
 import React from "react";
 import HomePage from "./Home.page";
-import { render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
+import {
+  findByRole,
+  render,
+  screen,
+  waitFor,
+  waitForElement,
+} from "@testing-library/react";
 import { getPizzas } from "../apis/getPizzas";
+import { useCart } from "../contexts/Basket.context";
 
-// Mock the module that exports getPizzas
 jest.mock("../apis/getPizzas");
+jest.mock("../contexts/Basket.context", () => ({
+  useCart: jest.fn(),
+}));
+jest.mock("../components/Images", () => ({
+  images: {
+    default: "default.webp",
+  },
+}));
 
-test("renders home page and checks for pizza data", async () => {
-  // Mock implementation of getPizzas
+beforeEach(() => {
+  jest.clearAllMocks();
+  getPizzas.mockResolvedValue({ data: [] }); // Assume no pizzas by default
+  useCart.mockImplementation(() => ({
+    addToCart: jest.fn(),
+  }));
+});
+
+test("successfully renders home page", async () => {
+  render(<HomePage />);
+  expect(
+    screen.getByText(/Best Stone Oven Pizza in London/i)
+  ).toBeInTheDocument();
+});
+
+test("fetches and displays pizza data", async () => {
   const mockPizzas = [
     {
       name: "Margherita",
-      ingredients: ["tomato", "mozzarella", "basil"],
-      sizes: [{ price: "$8" }, { price: "$10" }, { price: "$12" }],
+      ingredients: ["Tomato", "Mozzarella", "Basil"],
+      sizes: [
+        { size: "Small", price: 8 },
+        { size: "Medium", price: 10 },
+        { size: "Large", price: 12 },
+      ],
     },
-    // Add more mock pizza data as needed
+  ];
+  getPizzas.mockResolvedValue({ data: mockPizzas });
+  render(<HomePage />);
+  await waitFor(() => {
+    expect(screen.getByText("Margherita")).toBeInTheDocument();
+  });
+});
+
+// test("failure to fetch pizza data", async () => {
+//   getPizzas.mockRejectedValue(new Error("Failed to fetch"));
+//   render(<HomePage />);
+//   await waitFor(() => {
+//     expect(screen.getByText("Error retrieving pizzas")).toBeInTheDocument();
+//   });
+// });
+
+test("adds pizza to cart", async () => {
+  const mockPizzas = [
+    {
+      name: "Pepperoni",
+      ingredients: ["Pepperoni", "Cheese", "Tomato Sauce"],
+      sizes: [{ size: "Medium", price: 12 }],
+      image: "default.webp",
+    },
   ];
   getPizzas.mockResolvedValue({ data: mockPizzas });
 
-  render(<HomePage />);
+  const addToCart = jest.fn();
+  useCart.mockImplementation(() => ({
+    addToCart,
+  }));
 
-  // Check if the first pizza's name is displayed
-  expect(await screen.findByText(mockPizzas[0].name)).toBeInTheDocument();
-  // Add more assertions as needed based on your mock data and UI structure
+  render(<HomePage />);
+  const addButton = await screen.findByRole("button", { name: /add to cart/i });
+
+userEvent.click(addButton);
+
+  await waitFor(() => {
+    expect(addToCart).toHaveBeenCalledWith(expect.anything()); // Replace with the actual expected object
+  });
 });

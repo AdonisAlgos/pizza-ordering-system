@@ -11,11 +11,15 @@ const LoginPage = () => {
           <form>
             <div className="form-group mb-3">
               <label>Email</label>
-              <input type="text" className="form-control" />
+              <input data-testid="email" type="text" className="form-control" />
             </div>
             <div className="form-group mb-3">
               <label>Password</label>
-              <input type="password" className="form-control" />
+              <input
+                data-testid="password"
+                type="password"
+                className="form-control"
+              />
             </div>
             <small id="reg" className="form-text text-muted">
               <Link to="/register">Don't have an account? Sign up!</Link>

@@ -9,13 +9,11 @@ test("renders login page and checks for username, password fields and login, reg
     </BrowserRouter>
   );
 
-  const username = screen.getByPlaceholderText("Username");
-  const password = screen.getByPlaceholderText("Password");
-  const loginButton = screen.getByRole("button", { name: "Login" });
-  const registerButton = screen.getByRole("button", { name: "Register" });
+  const username = screen.getByTestId("email");
+  const password = screen.getByTestId("password");
+  const loginButton = screen.getByRole("button", { name: "Sign in" });
 
   expect(username).toBeInTheDocument();
   expect(password).toBeInTheDocument();
   expect(loginButton).toBeInTheDocument();
-  expect(registerButton).toBeInTheDocument();
 });

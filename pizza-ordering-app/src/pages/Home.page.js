@@ -87,6 +87,7 @@ const HomePage = () => {
                       onClick={() => handleAddToCart(pizza, sizeIndex)}
                       style={{ borderColor: "lightGrey" }}
                       className="btn btn-primary mt-3 bg-white"
+                      aria-label="Add to cart"
                     >
                       <FontAwesomeIcon icon={faPlus} color="black" />
                     </button>
