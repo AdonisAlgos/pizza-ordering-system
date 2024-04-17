@@ -1,4 +1,3 @@
-# Name of the workflow
 name: Node.js CI
 
 # Events to trigger
