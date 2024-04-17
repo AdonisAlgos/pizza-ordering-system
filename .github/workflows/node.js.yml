@@ -1,15 +1,19 @@
+# Name of the workflow
 name: Node.js CI
 
+# Events to trigger
 on:
   push:
     branches: [ main ]
   pull_request:
     branches: [ main ]
 
+# Set working directory
 defaults:
   run:
     working-directory: ./pizza-ordering-app
 
+# Define jobs
 jobs:
   build:
     strategy:
