@@ -12,7 +12,7 @@ export const CartProvider = ({ children }) => {
   };
 
     const clearCart = (item) => {
-      setCartItems((currentItems) => []);
+      setCartItems(() => []);
     };
 
     return (
