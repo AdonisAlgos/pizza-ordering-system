@@ -8,6 +8,7 @@ const BasketPage = () => {
   return (
     <div className="container d-flex flex-column align-items-center justify-content-center">
       <h3 className="text-center mb-4">Basket</h3>
+      {cartItems.length === 0 && <p>Your basket is empty</p>}
       {cartItems.map((pizza, index) => (
         <div
           key={index}

@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { getPizzas } from "../apis/getPizzas";
 import { images } from "../components/Images";
 import { useCart } from "../contexts/Basket.context";
+import "./Home.page.css";
 
 const HomePage = () => {
   const [pizzas, setPizzas] = useState([]);
@@ -70,22 +71,21 @@ const HomePage = () => {
               </div>
               <div
                 style={{
-                  backgroundColor: "black",
-                  color: "white",
+                  backgroundColor: "rgb(242, 242, 242)",
                 }}
                 className="d-flex p-2 gap-2 justify-content-around"
               >
                 {pizza.sizes.map((size, sizeIndex) => (
                   <div
                     key={sizeIndex}
-                    className="d-flex flex-column align-items-center justify-content-center"
+                    className="d-flex flex-column align-items-center justify-content-center w-100"
                   >
                     <div>{size.size}</div>
                     <div>£{size.price}</div>
                     <button
                       onClick={() => handleAddToCart(pizza, sizeIndex)}
                       style={{ borderColor: "lightGrey" }}
-                      className="btn btn-primary mt-3 bg-white"
+                      className="btn btn-primary mt-3 bg-white w-100 custom-hover"
                       data-testid="add-to-cart-button"
                     >
                       <FontAwesomeIcon icon={faPlus} color="black" />
