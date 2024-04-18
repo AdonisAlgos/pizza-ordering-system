@@ -1,7 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useUser } from "../contexts/User.context";
 
 const Navbar = () => {
+  const { user } = useUser();
+
   return (
     <nav
       className="navbar navbar-expand navbar-light fixed-top"
@@ -25,9 +28,15 @@ const Navbar = () => {
               <span className="nav-link">|</span>
             </li>
             <li className="nav-item">
-              <Link to="/login" className="nav-link">
-                Sign In
-              </Link>
+              {user ? (
+                <Link to="/profile" className="nav-link">
+                  {user.name}
+                </Link>
+              ) : (
+                <Link to="/login" className="nav-link">
+                  Sign In
+                </Link>
+              )}
             </li>
           </ul>
         </div>
