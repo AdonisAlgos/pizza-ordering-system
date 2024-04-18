@@ -1,27 +1,78 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { registerUser } from "../apis/registerUser";
 
 const RegisterPage = () => {
+  const [formData, setFormData] = useState({
+    name: "",
+    lastName: "",
+    email: "",
+    password: "",
+    streetAddress: "",
+    city: "",
+    postcode: "",
+  });
+
+  const navigate = useNavigate();
+
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    registerUser(formData)
+      .then((response) => {
+        alert(response.data.message);
+        navigate("/");
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+        alert("Failed to register user");
+      });
+  };
+
   return (
     <div className="flex: 1 container d-flex align-items-center justify-content-center">
       <div className="row w-100">
         <div className="col-12 col-sm-10 col-md-8 col-lg-6 col-xl-5 mx-auto">
           <h3 className="text-center mb-4">Registration</h3>
-          <form>
+          <form onSubmit={handleSubmit}>
             <div className="form-group mb-3">
-              <label>Last Name</label>
-              <input type="text" className="form-control" />
+              <label>Name</label>
+              <input
+                type="text"
+                className="form-control"
+                name="name"
+                value={formData.name}
+                onChange={handleChange}
+                required
+              />
             </div>
             <div className="form-group mb-3">
               <label>Last Name</label>
-              <input type="text" className="form-control" />
+              <input
+                type="text"
+                className="form-control"
+                name="lastName"
+                value={formData.lastName}
+                onChange={handleChange}
+                required
+              />
             </div>
             <div className="form-group mb-3">
               <label>Email</label>
               <input
                 type="text"
                 className="form-control"
+                name="email"
                 placeholder="user@example.com"
+                value={formData.email}
+                onChange={handleChange}
+                required
               />
               <small id="emailHelp" className="form-text text-muted">
                 We'll never share your email with anyone else.
@@ -29,19 +80,47 @@ const RegisterPage = () => {
             </div>
             <div className="form-group mb-3">
               <label>Password</label>
-              <input type="password" className="form-control" />
+              <input
+                type="password"
+                className="form-control"
+                name="password"
+                value={formData.password}
+                onChange={handleChange}
+                required
+              />
             </div>
             <div className="form-group mb-3">
               <label>Street Address</label>
-              <input type="text" className="form-control" />
+              <input
+                type="text"
+                className="form-control"
+                name="streetAddress"
+                value={formData.streetAddress}
+                onChange={handleChange}
+                required
+              />
             </div>
             <div className="form-group mb-3">
               <label>City</label>
-              <input type="text" className="form-control" />
+              <input
+                type="text"
+                className="form-control"
+                name="city"
+                value={formData.city}
+                onChange={handleChange}
+                required
+              />
             </div>
             <div className="form-group mb-3">
               <label>Postcode</label>
-              <input type="text" className="form-control" />
+              <input
+                type="text"
+                className="form-control"
+                name="postcode"
+                value={formData.postcode}
+                onChange={handleChange}
+                required
+              />
             </div>
             <small id="reg" className="form-text text-muted">
               <Link to="/login">Already have an account? Try logging in!</Link>
