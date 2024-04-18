@@ -22,17 +22,16 @@ const RegisterPage = () => {
     });
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    registerUser(formData)
-      .then((response) => {
-        alert(response.data.message);
-        navigate("/");
-      })
-      .catch((error) => {
-        console.error("Error:", error);
-        alert("Failed to register user");
-      });
+
+    try {
+      registerUser(formData);
+      navigate("/login");
+    } catch (error) {
+      console.error(error);
+      alert("Login failed, please try again later.");
+    }
   };
 
   return (
