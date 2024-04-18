@@ -2,17 +2,35 @@ import { React, useState } from "react";
 import { useCart } from "../contexts/Basket.context";
 import "./Basket.page.css";
 import SpinnerComponent from "../components/Spinner.component";
+import { useUser } from "../contexts/User.context";
 
 const BasketPage = () => {
+  const { user } = useUser();
   const { cartItems, clearCart } = useCart();
   const [showPopup, setShowPopup] = useState(false);
 
-  const handleCompleteOrder = () => {
+  const [street, setStreet] = useState("");
+  const [city, setCity] = useState("");
+  const [postcode, setPostcode] = useState("");
+
+  const processOrder = () => {
     setShowPopup(true);
     setTimeout(() => {
       setShowPopup(false);
       clearCart();
     }, 2000); // Popup shows for 2 seconds
+  };
+
+  const handleCompleteOrder = () => {
+    if (user) {
+      processOrder();
+    } else if (street && city && postcode) {
+      processOrder();
+    } else {
+      alert(
+        "Please log in or fill in all address fields to complete the order."
+      );
+    }
   };
 
   return (
@@ -55,6 +73,52 @@ const BasketPage = () => {
               </div>
             </div>
           ))}
+          <div className="d-flex justify-content-center pt-3 col-lg-8 col-md-10 col-sm-12">
+            {user ? (
+              <div>
+                {user.address}
+                {user.city}
+                {user.postcode}
+              </div>
+            ) : (
+              <div className="w-100">
+                <div className="form-group mb-3">
+                  <input
+                    data-testid="street"
+                    type="text"
+                    placeholder="Street Address"
+                    className="form-control"
+                    required
+                    value={street}
+                    onChange={(e) => setStreet(e.target.value)}
+                  />
+                </div>
+                <div className="form-group mb-3">
+                  <input
+                    data-testid="city"
+                    type="text"
+                    placeholder="City"
+                    className="form-control"
+                    required
+                    value={city}
+                    onChange={(e) => setCity(e.target.value)}
+                  />
+                </div>
+                <div className="form-group mb-3">
+                  <input
+                    data-testid="postcode"
+                    type="text"
+                    placeholder="Postcode"
+                    className="form-control"
+                    required
+                    value={postcode}
+                    onChange={(e) => setPostcode(e.target.value)}
+                  />
+                </div>
+              </div>
+            )}
+          </div>
+
           <div className="d-flex justify-content-center pt-3 col-lg-8 col-md-10 col-sm-12">
             <button
               className="btn btn-primary w-100"
