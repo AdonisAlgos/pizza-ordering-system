@@ -44,6 +44,7 @@ const RegisterPage = () => {
             <div className="form-group mb-3">
               <label>Name</label>
               <input
+                data-testid="name"
                 type="text"
                 className="form-control"
                 name="name"
@@ -55,6 +56,7 @@ const RegisterPage = () => {
             <div className="form-group mb-3">
               <label>Last Name</label>
               <input
+                data-testid="last name"
                 type="text"
                 className="form-control"
                 name="lastName"
@@ -66,6 +68,7 @@ const RegisterPage = () => {
             <div className="form-group mb-3">
               <label>Email</label>
               <input
+                data-testid="email"
                 type="text"
                 className="form-control"
                 name="email"
@@ -81,6 +84,7 @@ const RegisterPage = () => {
             <div className="form-group mb-3">
               <label>Password</label>
               <input
+                data-testid="password"
                 type="password"
                 className="form-control"
                 name="password"
@@ -92,6 +96,7 @@ const RegisterPage = () => {
             <div className="form-group mb-3">
               <label>Street Address</label>
               <input
+                data-testid="street"
                 type="text"
                 className="form-control"
                 name="streetAddress"
@@ -103,6 +108,7 @@ const RegisterPage = () => {
             <div className="form-group mb-3">
               <label>City</label>
               <input
+                data-testid="city"
                 type="text"
                 className="form-control"
                 name="city"
@@ -114,6 +120,7 @@ const RegisterPage = () => {
             <div className="form-group mb-3">
               <label>Postcode</label>
               <input
+                data-testid="postcode"
                 type="text"
                 className="form-control"
                 name="postcode"
