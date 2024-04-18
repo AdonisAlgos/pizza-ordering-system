@@ -1,9 +1,19 @@
-import { React } from "react";
+import { React, useState } from "react";
 import { useCart } from "../contexts/Basket.context";
 import "./Basket.page.css";
+import SpinnerComponent from "../components/Spinner.component";
 
 const BasketPage = () => {
-  const { cartItems } = useCart();
+  const { cartItems, clearCart } = useCart();
+  const [showPopup, setShowPopup] = useState(false);
+
+  const handleCompleteOrder = () => {
+    setShowPopup(true);
+    setTimeout(() => {
+      setShowPopup(false);
+      clearCart();
+    }, 2000); // Popup shows for 2 seconds
+  };
 
   return (
     <div className="container d-flex flex-column align-items-center justify-content-center">
@@ -46,9 +56,20 @@ const BasketPage = () => {
             </div>
           ))}
           <div className="d-flex justify-content-center pt-3 col-lg-8 col-md-10 col-sm-12">
-            <button className="btn btn-primary w-100">Complete Order</button>
+            <button
+              className="btn btn-primary w-100"
+              onClick={handleCompleteOrder}
+            >
+              Complete Order
+            </button>
           </div>
         </>
+      )}
+      {showPopup && (
+        <div className="popup">
+          <SpinnerComponent />
+          <div>Processing your order...</div>
+        </div>
       )}
     </div>
   );
