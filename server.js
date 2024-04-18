@@ -69,16 +69,36 @@ app.post("/register", async (req, res) => {
   }
 });
 
-// User authentication endpoint
 app.post("/login", async (req, res) => {
-  const { username, password } = req.body;
-  const user = await db.collection("customer").findOne({ username, password });
+  const { email, password } = req.body;
 
-  if (!user) {
-    return res.status(401).send({ message: "Invalid credentials" });
+  try {
+    const user = await UserModel.findOne({ email });
+
+    if (!user) {
+      return res.status(401).send({ message: "Invalid credentials" });
+    }
+
+    // Compare hashed password
+    const isMatch = await bcrypt.compare(password, user.password);
+    if (!isMatch) {
+      return res.status(401).send({ message: "Invalid credentials" });
+    }
+
+    const userToSend = {
+      name: user.name,
+      lastName: user.lastName,
+      email: user.email,
+      streetAddress: user.streetAddress,
+      city: user.city,
+      postcode: user.postcode,
+    };
+
+    res.status(200).send({ message: "Login successful", user: userToSend });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send({ message: "Server error" });
   }
-
-  res.status(200).send({ token: "fake-token-for-" + username });
 });
 
 // Pizza retrieval endpoint
@@ -92,26 +112,26 @@ app.get("/pizzas", async (req, res) => {
   }
 });
 
-app.post("/pizza", async (req, res) => {
-  try {
-    const newPizza = new PizzaModel(req.body);
+// app.post("/pizza", async (req, res) => {
+//   try {
+//     const newPizza = new PizzaModel(req.body);
 
-    await newPizza.save();
+//     await newPizza.save();
 
-    res.status(201).send({ message: "Pizza created successfully" });
-  } catch (error) {
-    console.error("Error creating pizza:", error);
-    res.status(500).send({ message: "Error creating pizza" });
-  }
-});
+//     res.status(201).send({ message: "Pizza created successfully" });
+//   } catch (error) {
+//     console.error("Error creating pizza:", error);
+//     res.status(500).send({ message: "Error creating pizza" });
+//   }
+// });
 
-app.get("/orders", async (req, res) => {
-  const orders = await db
-    .collection("order")
-    .find({ status: "completed" })
-    .toArray();
-  res.status(200).send(orders);
-});
+// app.get("/orders", async (req, res) => {
+//   const orders = await db
+//     .collection("order")
+//     .find({ status: "completed" })
+//     .toArray();
+//   res.status(200).send(orders);
+// });
 
 async function startServer() {
   await connectMongo();

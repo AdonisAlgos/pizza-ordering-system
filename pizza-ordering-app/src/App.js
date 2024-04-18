@@ -10,6 +10,7 @@ import {
 } from "./pages";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { CartProvider } from "./contexts/Basket.context";
+import { UserProvider } from "./contexts/User.context";
 
 const router = createBrowserRouter([
   {
@@ -43,9 +44,11 @@ const router = createBrowserRouter([
 
 function App() {
   return (
-    <CartProvider>
-      <RouterProvider router={router} />
-    </CartProvider>
+    <UserProvider>
+      <CartProvider>
+        <RouterProvider router={router} />
+      </CartProvider>
+    </UserProvider>
   );
 }
 
