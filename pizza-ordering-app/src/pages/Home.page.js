@@ -3,9 +3,10 @@ import { useState, useEffect } from "react";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { getPizzas } from "../apis/getPizzas";
-import { images } from "../components/Images";
+import { images } from "../components/PizzaImages";
 import { useCart } from "../contexts/Basket.context";
 import "./Home.page.css";
+import CYOPizzaComponent from "../components/CYOPizza.component";
 
 const HomePage = () => {
   const [pizzas, setPizzas] = useState([]);
@@ -44,7 +45,7 @@ const HomePage = () => {
           height: "150px",
         }}
       >
-        Best Stone Oven Pizza in London
+        Best stone oven pizza selections menu
       </h1>
 
       <div className="container mt-4">
@@ -97,6 +98,7 @@ const HomePage = () => {
           ))}
         </div>
       </div>
+      <CYOPizzaComponent />
     </div>
   );
 };

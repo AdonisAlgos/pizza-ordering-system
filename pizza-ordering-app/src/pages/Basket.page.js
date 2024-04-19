@@ -69,7 +69,7 @@ const BasketPage = () => {
                 style={{ width: "20%" }}
               >
                 <p>Size: {pizza.size}</p>
-                <p>Price: {pizza.price}</p>
+                <p>Price: £{pizza.price}</p>
               </div>
             </div>
           ))}
