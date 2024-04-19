@@ -59,14 +59,6 @@ test("fetches and displays pizza data", async () => {
   });
 });
 
-// test("failure to fetch pizza data", async () => {
-//   getPizzas.mockRejectedValue(new Error("Failed to fetch"));
-//   render(<HomePage />);
-//   await waitFor(() => {
-//     expect(screen.getByText("Error retrieving pizzas")).toBeInTheDocument();
-//   });
-// });
-
 test("adds pizza to cart", async () => {
   const mockPizzas = [
     {
