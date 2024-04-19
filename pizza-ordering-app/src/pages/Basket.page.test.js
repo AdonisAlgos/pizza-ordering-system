@@ -2,10 +2,17 @@ import React from "react";
 import { render, screen } from "@testing-library/react";
 import BasketPage from "./Basket.page";
 import { useCart } from "../contexts/Basket.context";
+import { useUser } from "../contexts/User.context";
 
 // Mocking the useCart hook
 jest.mock("../contexts/Basket.context", () => ({
   useCart: jest.fn(),
+}));
+
+jest.mock("../contexts/User.context", () => ({
+  useUser: () => ({
+    user: null,
+  }),
 }));
 
 describe("BasketPage", () => {
