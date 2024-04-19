@@ -15,7 +15,7 @@ jest.mock("../apis/getPizzas");
 jest.mock("../contexts/Basket.context", () => ({
   useCart: jest.fn(),
 }));
-jest.mock("../components/pizzaImages", () => ({
+jest.mock("../components/PizzaImages", () => ({
   images: {
     default: "default.webp",
   },
