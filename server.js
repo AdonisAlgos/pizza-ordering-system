@@ -112,26 +112,6 @@ app.get("/pizzas", async (req, res) => {
   }
 });
 
-// app.post("/pizza", async (req, res) => {
-//   try {
-//     const newPizza = new PizzaModel(req.body);
-
-//     await newPizza.save();
-
-//     res.status(201).send({ message: "Pizza created successfully" });
-//   } catch (error) {
-//     console.error("Error creating pizza:", error);
-//     res.status(500).send({ message: "Error creating pizza" });
-//   }
-// });
-
-// app.get("/orders", async (req, res) => {
-//   const orders = await db
-//     .collection("order")
-//     .find({ status: "completed" })
-//     .toArray();
-//   res.status(200).send(orders);
-// });
 
 async function startServer() {
   await connectMongo();
