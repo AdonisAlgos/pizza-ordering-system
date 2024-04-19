@@ -86,7 +86,7 @@ const HomePage = () => {
                     <button
                       onClick={() => handleAddToCart(pizza, sizeIndex)}
                       style={{ borderColor: "lightGrey" }}
-                      className="btn btn-primary mt-3 bg-white w-100 custom-hover"
+                      className="btn btn-primary mt-3 bg-white w-100 transform-h-1y shadow-h"
                       data-testid="add-to-cart-button"
                     >
                       <FontAwesomeIcon icon={faPlus} color="black" />

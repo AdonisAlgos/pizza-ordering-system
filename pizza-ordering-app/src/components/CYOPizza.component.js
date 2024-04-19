@@ -17,6 +17,7 @@ const CYOPizzaComponent = () => {
     size: "",
     ingredients: [],
     price: 0,
+    image: images.default,
   });
 
   const toppingsWithImages = [
@@ -62,7 +63,9 @@ const CYOPizzaComponent = () => {
       >
         You pick it, we cook it!
       </h1>
-      <p className="lead">Choose your size, sauce, cheese, and toppings</p>
+      <p className="lead">
+        Choose your size and select your favourite toppings
+      </p>
       <form onSubmit={handleSubmit}>
         <div className="mb-3">
           <label htmlFor="size" className="form-label">
@@ -84,7 +87,7 @@ const CYOPizzaComponent = () => {
         <div className="row mb-3">
           {toppingsWithImages.map((topping) => (
             <div
-              className="col-lg-4 col-md-6 col-sm-12 custom-hover"
+              className="col-lg-4 col-md-6 col-sm-12 shadow-h"
               key={topping.name}
             >
               <div
@@ -121,8 +124,8 @@ const CYOPizzaComponent = () => {
         </div>
         <button
           style={{ borderColor: "lightGrey" }}
-          className="btn btn-primary mt-3 bg-white w-100 custom-hover"
-          data-testid="add-to-cart-button"
+          className="btn btn-primary mt-3 bg-white w-100 shadow-h"
+          data-testid="cyo-add-to-cart-button"
         >
           <FontAwesomeIcon icon={faPlus} color="black" />
         </button>

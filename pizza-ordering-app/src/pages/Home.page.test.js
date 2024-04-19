@@ -15,7 +15,7 @@ jest.mock("../apis/getPizzas");
 jest.mock("../contexts/Basket.context", () => ({
   useCart: jest.fn(),
 }));
-jest.mock("../components/Images", () => ({
+jest.mock("../components/pizzaImages", () => ({
   images: {
     default: "default.webp",
   },
@@ -34,7 +34,7 @@ test("successfully renders home page", async () => {
 
   await waitFor(() => {
     expect(
-      screen.getByText(/Best Stone Oven Pizza in London/i)
+      screen.getByText(/Best stone oven pizza selections menu/i)
     ).toBeInTheDocument();
   });
 });

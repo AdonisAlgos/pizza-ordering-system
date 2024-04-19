@@ -3,6 +3,7 @@ import image2 from "../assets/ingredientImages/onions.webp";
 import image3 from "../assets/ingredientImages/peppers.webp";
 import image4 from "../assets/ingredientImages/pepperoni.webp";
 import image5 from "../assets/ingredientImages/olives.webp";
+import image6 from "../assets/ingredientImages/default.webp";
 
 export const images = {
   mushrooms: image1,
@@ -10,4 +11,5 @@ export const images = {
   peppers: image3,
   pepperoni: image4,
   olives: image5,
+  default: image6,
 };

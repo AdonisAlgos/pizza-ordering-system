@@ -73,12 +73,12 @@ const BasketPage = () => {
               </div>
             </div>
           ))}
-          <div className="d-flex justify-content-center pt-3 col-lg-8 col-md-10 col-sm-12">
+          <div className="d-flex justify-content-start pt-3 col-lg-8 col-md-10 col-12">
             {user ? (
-              <div>
-                {user.address}
-                {user.city}
-                {user.postcode}
+              <div className="d-flex flex-column gap-2">
+                <div>Street: {user.streetAddress}</div>
+                <div>City: {user.city}</div>
+                <div>Postcode {user.postcode}</div>
               </div>
             ) : (
               <div className="w-100">
@@ -119,7 +119,7 @@ const BasketPage = () => {
             )}
           </div>
 
-          <div className="d-flex justify-content-center pt-3 col-lg-8 col-md-10 col-sm-12">
+          <div className="d-flex justify-content-center pt-3 col-lg-8 col-md-10 col-12">
             <button
               className="btn btn-primary w-100"
               onClick={handleCompleteOrder}
