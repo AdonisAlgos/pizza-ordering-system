@@ -1,13 +1,28 @@
 import React from "react";
-import { Link, useRouteError } from "react-router-dom";
+import "./Error.page.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHome } from "@fortawesome/free-solid-svg-icons";
+import { Link } from "react-router-dom";
 
 const ErrorPage = () => {
-  const error = useRouteError();
-  console.log(error);
   return (
-    <div>
-      <h1>ErrorPage</h1>
-      <Link to="/">Home</Link>
+    <div className="flex-column flex: 1 container d-flex align-items-center justify-content-center error-page">
+      <h1
+        className="text-center"
+        style={{ fontFamily: "'Pacifico', cursive", fontSize: "24px" }}
+      >
+        Oops! Something went wrong.
+      </h1>
+      <p className="text-center" style={{ margin: "20px" }}>
+        We couldn't cook up the page you were looking for.
+      </p>
+      <Link
+        to="/"
+        className="btn btn-primary d-flex align-items-center justify-content-center"
+      >
+        <FontAwesomeIcon icon={faHome} />
+        <span style={{ marginLeft: "10px" }}>Take Me Home</span>
+      </Link>
     </div>
   );
 };

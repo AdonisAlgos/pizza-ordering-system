@@ -5,7 +5,6 @@ import {
   RegisterPage,
   BasketPage,
   ErrorPage,
-  UserPage,
   LayoutPage,
 } from "./pages";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
@@ -33,10 +32,6 @@ const router = createBrowserRouter([
       {
         path: "basket",
         element: <BasketPage />,
-      },
-      {
-        path: "user",
-        element: <UserPage />,
       },
     ],
   },

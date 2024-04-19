@@ -1,13 +1,7 @@
 import React from "react";
 import HomePage from "./Home.page";
 import userEvent from "@testing-library/user-event";
-import {
-  findByRole,
-  render,
-  screen,
-  waitFor,
-  act,
-} from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
 import { getPizzas } from "../apis/getPizzas";
 import { useCart } from "../contexts/Basket.context";
 
@@ -80,9 +74,8 @@ test("adds pizza to cart", async () => {
 
   render(<HomePage />);
 
-  // Fetch all buttons and click the one for the Medium size pizza
   const addButtons = await screen.findAllByTestId("add-to-cart-button");
-  userEvent.click(addButtons[1]); // Assuming the second button is for Medium
+  userEvent.click(addButtons[1]);
 
   await waitFor(() => {
     expect(addToCart).toHaveBeenCalledWith({

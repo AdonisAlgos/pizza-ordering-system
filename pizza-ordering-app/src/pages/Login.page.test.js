@@ -2,6 +2,7 @@ import React from "react";
 import { render, fireEvent, waitFor, screen } from "@testing-library/react";
 import { BrowserRouter } from "react-router-dom";
 import LoginPage from "./Login.page";
+import { loginAuthentication } from "../apis/loginAuthentication";
 
 jest.mock("react-router-dom", () => ({
   ...jest.requireActual("react-router-dom"),
@@ -49,6 +50,7 @@ test("allows the user to enter email and password", () => {
   expect(emailInput.value).toBe("user@example.com");
   expect(passwordInput.value).toBe("password123");
 });
+
 test("submits the form with email and password", async () => {
   render(
     <BrowserRouter>
@@ -56,8 +58,6 @@ test("submits the form with email and password", async () => {
     </BrowserRouter>
   );
 
-  const loginAuthentication =
-    require("../apis/loginAuthentication").loginAuthentication;
   loginAuthentication.mockResolvedValue({
     data: { user: { name: "John Doe" } },
   });
