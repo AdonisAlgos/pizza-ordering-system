@@ -17,7 +17,7 @@ jest.mock("../components/PizzaImages", () => ({
 
 beforeEach(() => {
   jest.clearAllMocks();
-  getPizzas.mockResolvedValue({ data: [] }); // Assume no pizzas by default
+  getPizzas.mockResolvedValue({ data: [] });
   useCart.mockImplementation(() => ({
     addToCart: jest.fn(),
   }));
